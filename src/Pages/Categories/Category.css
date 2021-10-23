@@ -1,0 +1,33 @@
+.listing-page-title {
+  margin-left: 100px;
+  text-transform: capitalize;
+}
+
+.listing-page {
+  margin: 0 auto;
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: space-around;
+  grid-row-gap: 50px;
+  margin-bottom: 100px;
+  text-decoration: none;
+}
+
+.listing-page-product {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 300px;
+  height: 400px;
+  justify-self: center;
+  align-items: center;
+  border: solid black 2px;
+}
+.listing-page-image {
+  width: 260px;
+  height: 260px;
+  border: solid black 2px;
+  object-fit: contain;
+  object-position: center;
+}
