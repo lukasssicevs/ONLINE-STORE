@@ -3,6 +3,7 @@ import React, { Component } from "react";
 export class Images extends Component {
   render() {
     const { name, gallery, image, setImage } = this.props;
+
     return (
       <>
         <div className="small-image-container">
