@@ -1,17 +1,20 @@
 import { gql } from "@apollo/client";
 
-const CATEGORY = gql`
-  query category($categoryName: String!) {
-    category(input: { title: $categoryName }) {
+const DATA = gql`
+  query {
+    categories {
       name
       products {
-        gallery
         id
         name
+        inStock
+        gallery
+        category
+        brand
         attributes {
-          id
           name
           type
+          id
           items {
             displayValue
             value
@@ -22,11 +25,9 @@ const CATEGORY = gql`
           currency
           amount
         }
-        inStock
-        brand
       }
     }
   }
 `;
 
-export default CATEGORY;
+export default DATA;

@@ -106,3 +106,13 @@ return (
     }}
   </Query>
 );
+
+
+<div className="cart-product">
+            <div className="cart-product-details"></div>
+            <div className="cart-images-container">
+              <div className="left-button">o</div>
+              <img className="cart-product-image" src={image} />
+              <div className="right-button">o</div>
+            </div>
+          </div>

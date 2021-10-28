@@ -1,9 +1,15 @@
+.listing-page {
+  position: relative;
+  top: 80px;
+}
+
 .listing-page-title {
   margin-left: 100px;
   text-transform: capitalize;
 }
 
-.listing-page {
+.listing-page-products {
+  display: grid;
   margin: 0 auto;
   margin-top: 50px;
   display: grid;
@@ -15,7 +21,7 @@
 }
 
 .listing-page-product {
-  display: flex;
+  display: grid;
   justify-content: center;
   flex-direction: column;
   width: 300px;

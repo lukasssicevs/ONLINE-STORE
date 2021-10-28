@@ -23,16 +23,17 @@ export class Description extends Component {
   };
 
   render() {
-    const { id } = this.props;
+    const { id, setSelectedItems } = this.props;
     const { image } = this.state;
+    console.log(id);
     return (
       <Query query={DESCRIPTION} variables={{ productID: id }}>
         {({ loading, data, error }) => {
-          if (loading) return false;
+          if (loading) return "loading...";
           if (data) {
-            console.log(data);
             const { name, prices, gallery, description, attributes } =
               data.product;
+            console.log(data);
             return (
               <div className="description-page">
                 <Images
@@ -46,6 +47,8 @@ export class Description extends Component {
                   prices={prices}
                   attributes={attributes}
                   description={description}
+                  setSelectedItems={setSelectedItems}
+                  id={id}
                 />
               </div>
             );
