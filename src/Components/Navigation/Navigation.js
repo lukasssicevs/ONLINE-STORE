@@ -1,24 +1,20 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import { Query } from "@apollo/client/react/components";
-import CATEGORY from "../Pages/Categories/CategoryQ";
+import NAVIGATION from "./NavigationQ";
 import { FaBeer } from "react-icons/fa";
 import "./Navigation.css";
 
 export class Navigation extends Component {
-  constructor(props) {
-    super(props);
-    this.categoryRef = React.createRef();
-  }
-
   render() {
     const { setCategory } = this.props;
     return (
-      <Query query={CATEGORY}>
+      <Query query={NAVIGATION}>
         {({ loading, data, error }) => {
-          if (loading) return false;
+          if (loading) return "loading...";
           if (data) {
             const { categories } = data;
+            console.log(data);
             return (
               <nav>
                 {categories.map((category) => (
@@ -26,7 +22,7 @@ export class Navigation extends Component {
                     className="category"
                     key={category.name}
                     to={`/${category.name}`}
-                    onClick={() => setCategory(category)}
+                    onClick={() => setCategory(category.name)}
                     activeClassName="active-link"
                   >
                     {category.name}

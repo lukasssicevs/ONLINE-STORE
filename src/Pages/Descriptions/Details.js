@@ -7,54 +7,55 @@ export class Details extends Component {
     super(props);
 
     this.state = {
-      attributePairs: [],
+      opacity: "0.6",
     };
   }
 
   render() {
-    const { name, prices, attributes, description } = this.props;
+    const { id, name, prices, attributes, description, setSelectedItems } =
+      this.props;
     const color = "Color";
-    let attributeNumber = 0;
-
+    let selected = [id];
+    selected.length = attributes.length + 1;
     return (
       <div className="product-details">
         <p className="product-name">{name}</p>
         <form>
-          {attributes.map((attribute) => {
-            attributeNumber++;
-
-            console.log(attributeNumber);
+          {attributes.map((attribute, attributeIndex) => {
             return (
               <>
-                <p key={attribute.name}>{attribute.name}:</p>
+                <p key={name + ":" + attribute.name}>{attribute.name}:</p>
                 <div className="product-attributes" key={attribute.type}>
-                  {attribute.items.map((item, index) => (
-                    <>
-                      <input
-                        type="radio"
-                        key={item.value}
-                        name={attribute.name}
-                        value={item.value}
-                        id={item.value}
-                        onClick={() => {
-                          this.setState({
-                            attributePairs: "l",
-                          });
-                        }}
-                      />
-                      <label
-                        htmlFor={item.value}
-                        key={index}
-                        style={{
-                          backgroundColor: `${
-                            attribute.name === color ? item.value : null
-                          }`,
-                        }}
-                      >
-                        {attribute.name === color ? "" : item.value}
-                      </label>
-                    </>
-                  ))}
+                  {attribute.items.map((item, itemIndex) => {
+                    return (
+                      <>
+                        <input
+                          type="radio"
+                          key={name + ":" + item.value}
+                          name={attribute.name}
+                          value={item.value}
+                          id={attribute.name + ":" + item.value}
+                          onClick={() => {
+                            selected[attributeIndex + 1] = [
+                              attribute.name,
+                              item.value,
+                            ];
+                          }}
+                        />
+                        <label
+                          htmlFor={attribute.name + ":" + item.value}
+                          key={itemIndex}
+                          style={{
+                            backgroundColor: `${
+                              attribute.name === color ? item.value : null
+                            }`,
+                          }}
+                        >
+                          {attribute.name === color ? "" : item.value}
+                        </label>
+                      </>
+                    );
+                  })}
                 </div>
               </>
             );
@@ -68,7 +69,9 @@ export class Details extends Component {
           <button
             onClick={(event) => {
               event.preventDefault();
-              console.log(this.state.attributePairs);
+              selected.includes(undefined)
+                ? console.log("dont add")
+                : setSelectedItems(selected);
             }}
           >
             ADD TO CART
