@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Context from "../../Context";
 
 export class CartImages extends Component {
   constructor(props) {
@@ -8,6 +9,8 @@ export class CartImages extends Component {
       imageIndex: 0,
     };
   }
+
+  static contextType = Context;
 
   render() {
     const { gallery, name } = this.props;

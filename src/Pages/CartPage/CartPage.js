@@ -1,34 +1,38 @@
 import React, { Component } from "react";
 import { Query } from "@apollo/client/react/components";
-import DESCRIPTION from "./Descriptions/DescriptionQ";
-import { CartDetails } from "./CartDetails";
+import DESCRIPTION from "../DescriptionPage/DescriptionPageQuery";
+import CartDetails from "./CartDetails";
+import CartCounter from "./CartCounter";
 import CartImages from "./CartImages";
-import "./Cart.css";
+import "./CartPage.css";
+import Context from "../../Context";
 
-export class Cart extends Component {
+export class CartPage extends Component {
+  static contextType = Context;
   render() {
-    const { selectedItems } = this.props;
-    console.log(selectedItems);
+    const { addedItems } = this.context;
     return (
       <div className="cart-page">
-        {selectedItems.map((item, index) => {
+        <h1 className="cart-page-header">CART</h1>
+        {addedItems.map((item, index) => {
           return (
             <Query query={DESCRIPTION} variables={{ productID: item[0] }}>
               {({ loading, data, error }) => {
                 if (loading) return "loading...";
                 if (data) {
-                  // console.log(data);
-                  const { gallery, name, prices, attributes } = data.product;
-
+                  const { gallery, name, brand, prices, attributes } =
+                    data.product;
                   return (
                     <div className="cart-product">
                       <CartDetails
                         item={item}
                         name={name}
+                        brand={brand}
                         prices={prices}
                         attributes={attributes}
                         index={index}
                       />
+                      <CartCounter item={item} index={index} />
                       <CartImages gallery={gallery} name={name} />
                     </div>
                   );
@@ -43,4 +47,4 @@ export class Cart extends Component {
   }
 }
 
-export default Cart;
+export default CartPage;

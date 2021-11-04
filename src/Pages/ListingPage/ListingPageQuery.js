@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
-const CATEGORY = gql`
-  query category($categoryName: String!) {
-    category(input: { title: $categoryName }) {
+const LIST = gql`
+  query category($category: String!) {
+    category(input: { title: $category }) {
       name
       products {
         gallery
@@ -29,4 +29,4 @@ const CATEGORY = gql`
   }
 `;
 
-export default CATEGORY;
+export default LIST;

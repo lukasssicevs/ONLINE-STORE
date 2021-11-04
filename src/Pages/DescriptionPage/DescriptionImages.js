@@ -1,9 +1,26 @@
 import React, { Component } from "react";
+import Context from "../../Context";
 
 export class Images extends Component {
-  render() {
-    const { name, gallery, image, setImage } = this.props;
+  constructor(props) {
+    super(props);
 
+    this.state = {
+      image: "",
+    };
+  }
+
+  setImage = (image) => {
+    this.setState({
+      image: image,
+    });
+  };
+
+  static contextType = Context;
+  render() {
+    const { name, gallery, inStock } = this.props;
+    const { image } = this.state;
+    console.log(gallery);
     return (
       <>
         <div className="small-image-container">
@@ -12,8 +29,11 @@ export class Images extends Component {
               className="small-image"
               src={image}
               alt={name}
+              style={{
+                opacity: `${inStock ? "1" : "0.4"}`,
+              }}
               onClick={() => {
-                setImage(image);
+                this.setImage(image);
               }}
               key={index}
             />
@@ -23,6 +43,9 @@ export class Images extends Component {
           className="big-image"
           src={image === "" ? gallery[0] : image}
           alt={name}
+          style={{
+            opacity: `${inStock ? "1" : "0.4"}`,
+          }}
         />
       </>
     );
