@@ -5,8 +5,10 @@ const DESCRIPTION = gql`
     product(id: $productID) {
       id
       name
+      brand
       gallery
       description
+      inStock
       attributes {
         name
         type
