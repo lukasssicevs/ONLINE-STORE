@@ -1,0 +1,14 @@
+.listing-page-product p {
+  width: 356px;
+  margin: 0;
+  font-size: 18px;
+  line-height: 29px;
+}
+
+.listing-page-name {
+  font-weight: 300;
+}
+
+.listing-page-price {
+  font-weight: 500;
+}

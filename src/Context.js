@@ -1,9 +1,5 @@
 import React, { Component } from "react";
 import update from "react-addons-update";
-import { BiDollar } from "react-icons/bi";
-import { BiYen } from "react-icons/bi";
-import { BiPound } from "react-icons/bi";
-import { BiRuble } from "react-icons/bi";
 
 const Context = React.createContext();
 
@@ -42,17 +38,17 @@ export class ContextProvider extends Component {
   setCurrencySign = (currency) => {
     switch (currency[0]) {
       case "USD":
-        return <BiDollar />;
+        return "$";
       case "GBP":
-        return <BiPound />;
+        return "£";
       case "AUD":
-        return <BiDollar />;
+        return "$";
       case "JPY":
-        return <BiYen />;
+        return "¥";
       case "RUB":
-        return <BiRuble />;
+        return "₽";
       default:
-        return <BiDollar />;
+        return "$";
     }
   };
 
