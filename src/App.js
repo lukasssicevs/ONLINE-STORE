@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { ContextProvider } from "./Context";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+import WelcomePage from "./Components/WelcomePage/WelcomePage";
 import Navbar from "./Components/Navbar/Navbar";
-import WelcomePage from "./Pages/WelcomePage/WelcomePage";
-import ListingPage from "./Pages/ListingPage/ListingPage";
-import DescriptionPage from "./Pages/DescriptionPage/DescriptionPage";
-import CartPage from "./Pages/CartPage/CartPage";
-import ErrorPage from "./Pages/ErrorPage/ErrorPage";
-import "./App.css";
+import ListingPage from "./Components/ListingPage/ListingPage";
+import DescriptionPage from "./Components/DescriptionPage/DescriptionPage";
+import CartPage from "./Components/CartPage/CartPage";
+import ErrorPage from "./Components/ErrorPage/ErrorPage";
 
 // Bez atmaskām!!!
 

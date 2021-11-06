@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import CURRENCIES from "./CurrenciesQ";
 import { Query } from "@apollo/client/react/components";
-import "./Currencies.css";
+
+import CURRENCIES from "../../Queries/CurrenciesQuery";
 import Context from "../../Context";
+import "./Currencies.css";
 
 export class Currency extends Component {
   static contextType = Context;
@@ -29,8 +30,7 @@ export class Currency extends Component {
                       onChange={() => setCurrency(currency, currencyIndex)}
                     />
                     <label htmlFor={currency} key={`label:${currency}`}>
-                      {setCurrencySign([currency])}
-                      {currency}
+                      {setCurrencySign([currency])} {currency}
                     </label>
                   </div>
                 ))}
