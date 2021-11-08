@@ -18,9 +18,14 @@ export class CartPage extends Component {
         <h1 className="cart-page-header">CART</h1>
         {addedItems.map((item, itemIndex) => {
           return (
-            <Query query={DESCRIPTION} variables={{ productID: item[0] }}>
+            <Query
+              key={`${item[0]}:${itemIndex}`}
+              query={DESCRIPTION}
+              variables={{ productID: item[0] }}
+            >
               {({ loading, data, error }) => {
                 if (loading) return "loading...";
+                if (error) return "error...";
                 if (data) {
                   if (!data.product) {
                     return <Redirect to="/404" />;
@@ -42,7 +47,6 @@ export class CartPage extends Component {
                     </div>
                   );
                 }
-                if (error) return "error...";
               }}
             </Query>
           );

@@ -14,10 +14,11 @@ export class DescriptionPage extends Component {
       <Query query={DESCRIPTION} variables={{ productID: id }}>
         {({ loading, data, error }) => {
           if (loading) return "loading...";
-          if (!data || !data.product) {
-            return <Redirect to="/404" />;
-          }
+          if (error) return "error...";
           if (data) {
+            if (!data.product) {
+              return <Redirect to="/404" />;
+            }
             const {
               name,
               prices,
@@ -43,7 +44,6 @@ export class DescriptionPage extends Component {
               </div>
             );
           }
-          if (error) return "error...";
         }}
       </Query>
     );

@@ -9,8 +9,6 @@ import DescriptionPage from "./Components/DescriptionPage/DescriptionPage";
 import CartPage from "./Components/CartPage/CartPage";
 import ErrorPage from "./Components/ErrorPage/ErrorPage";
 
-// Bez atmaskām!!!
-
 export class App extends Component {
   render() {
     return (

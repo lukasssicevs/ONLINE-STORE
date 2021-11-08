@@ -8,16 +8,6 @@ const LIST = gql`
         gallery
         id
         name
-        attributes {
-          id
-          name
-          type
-          items {
-            displayValue
-            value
-            id
-          }
-        }
         prices {
           currency
           amount

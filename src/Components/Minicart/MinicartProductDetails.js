@@ -25,8 +25,10 @@ export class MinicartDetails extends Component {
               className="minicart-product-attributes"
               key={`${attribute.type}:${attributeIndex}`}
             >
-              {attribute.items.map((attributeItem, attributeItemIndex) => (
-                <>
+              {attribute.items.map((attributeItem) => (
+                <React.Fragment
+                  key={`${attribute.name}:${attributeItem.value}`}
+                >
                   <input
                     checked={
                       attributeItem.value ===
@@ -35,7 +37,6 @@ export class MinicartDetails extends Component {
                         : false
                     }
                     type="radio"
-                    key={attributeItem.value}
                     name={`minicart:${name}:${attribute.name}:${itemIndex}`}
                     value={attributeItem.value}
                     id={`minicart:${name}:${attribute.name}:${attributeItem.value}:${itemIndex}`}
@@ -49,7 +50,6 @@ export class MinicartDetails extends Component {
                   />
                   <label
                     htmlFor={`minicart:${name}:${attribute.name}:${attributeItem.value}:${itemIndex}`}
-                    key={attributeItemIndex}
                     className={
                       attribute.name === "Color"
                         ? "color-label"
@@ -63,7 +63,7 @@ export class MinicartDetails extends Component {
                   >
                     {attribute.name === "Color" ? "" : attributeItem.value}
                   </label>
-                </>
+                </React.Fragment>
               ))}
             </div>
           );

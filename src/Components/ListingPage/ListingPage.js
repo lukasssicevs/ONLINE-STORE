@@ -21,6 +21,7 @@ export class ListingPage extends Component {
           <Query query={LIST} variables={{ category: category }}>
             {({ loading, data, error }) => {
               if (loading) return "loading...";
+              if (error) return "error...";
               if (data) {
                 if (!data.category) {
                   return <Redirect to="/404" />;
@@ -30,6 +31,7 @@ export class ListingPage extends Component {
                   <>
                     {products.map((product) => (
                       <div
+                        key={product.name}
                         className="listing-page-product"
                         style={{
                           boxShadow: `${
@@ -49,7 +51,6 @@ export class ListingPage extends Component {
                   </>
                 );
               }
-              if (error) return "error...";
             }}
           </Query>
         </div>
