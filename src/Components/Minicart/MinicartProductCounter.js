@@ -8,7 +8,7 @@ import "./MinicartProductCounter.css";
 export class MinicartProductCounter extends Component {
   static contextType = Context;
   render() {
-    const { setCounter } = this.context;
+    const { setCounter, removeItem } = this.context;
     const { item, itemIndex } = this.props;
     return (
       <div className="minicart-counter-container">
@@ -24,9 +24,9 @@ export class MinicartProductCounter extends Component {
           src={miniMinus}
           alt="minus-box"
           onClick={() => {
-            item[item.length - 2] > 0
+            item[item.length - 2] > 1
               ? setCounter(item[item.length - 2] - 1, itemIndex)
-              : setCounter(item[item.length - 2] + 0, itemIndex);
+              : removeItem(itemIndex);
           }}
         />
       </div>

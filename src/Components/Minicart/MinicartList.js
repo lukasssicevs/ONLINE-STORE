@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import { Query } from "@apollo/client/react/components";
 
 import MinicartProductDetails from "./MinicartProductDetails";
@@ -15,10 +16,18 @@ export class MinicartList extends Component {
       <div className="minicart-list">
         {addedItems.map((item, itemIndex) => {
           return (
-            <Query query={DESCRIPTION} variables={{ productID: item[0] }}>
+            <Query
+              key={`${item[0]}:${itemIndex}`}
+              query={DESCRIPTION}
+              variables={{ productID: item[0] }}
+            >
               {({ loading, data, error }) => {
                 if (loading) return "loading...";
+                if (error) return "error...";
                 if (data) {
+                  if (!data.product) {
+                    return <Redirect to="/404" />;
+                  }
                   const { gallery, name, brand, prices, attributes } =
                     data.product;
                   return (
@@ -44,7 +53,6 @@ export class MinicartList extends Component {
                     </div>
                   );
                 }
-                if (error) return "error...";
               }}
             </Query>
           );

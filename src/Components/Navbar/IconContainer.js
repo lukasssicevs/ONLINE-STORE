@@ -9,14 +9,9 @@ import "./IconContainer.css";
 export class IconContainer extends Component {
   static contextType = Context;
   render() {
-    const {
-      showMinicart,
-      showCurrencies,
-      currenciesActive,
-      currency,
-      setCurrencySign,
-      addedItems,
-    } = this.context;
+    const { currenciesActive, currency, setCurrencySign, addedItems } =
+      this.context;
+    const { showMinicart, showCurrencies } = this.props;
     return (
       <div className="icon-container">
         <div

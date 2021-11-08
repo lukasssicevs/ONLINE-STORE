@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 
 import "./DescriptionAttributes.css";
 
@@ -10,24 +10,18 @@ export class DescriptionAttributes extends Component {
       <>
         {attributes.map((attribute, attributeIndex) => {
           return (
-            <>
-              <p
-                className="attribute-name"
-                key={`${name}:${attribute.name}:${attributeIndex}`}
-              >
-                {attribute.name}:
-              </p>
-              <div
-                className="product-attributes"
-                key={`${name}:${attribute.type}:${attributeIndex}`}
-              >
+            <React.Fragment key={`${name}:${attribute.name}`}>
+              <p className="attribute-name">{attribute.name}:</p>
+              <div className="product-attributes">
                 {attribute.items.map((item, itemIndex) => {
                   return (
-                    <>
+                    <div
+                      className="attribute-item-container"
+                      key={`${name}:${item.value}`}
+                    >
                       <input
                         defaultChecked={itemIndex === 0 && true}
                         type="radio"
-                        key={`${name}:${item.value}`}
                         name={attribute.name}
                         value={item.value}
                         id={`${attribute.name}:${item.value}`}
@@ -40,7 +34,6 @@ export class DescriptionAttributes extends Component {
                       />
                       <label
                         htmlFor={`${attribute.name}:${item.value}`}
-                        key={itemIndex}
                         className={
                           attribute.name === "Color"
                             ? "color-label"
@@ -54,11 +47,11 @@ export class DescriptionAttributes extends Component {
                       >
                         {attribute.name === "Color" ? "" : item.value}
                       </label>
-                    </>
+                    </div>
                   );
                 })}
               </div>
-            </>
+            </React.Fragment>
           );
         })}
       </>

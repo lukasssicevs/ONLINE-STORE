@@ -9,7 +9,7 @@ export class CartProductCounter extends Component {
   static contextType = Context;
   render() {
     const { item, itemIndex } = this.props;
-    const { setCounter } = this.context;
+    const { setCounter, removeItem } = this.context;
     return (
       <div className="counter-container">
         <img
@@ -24,9 +24,9 @@ export class CartProductCounter extends Component {
           src={Minus}
           alt="minus-box"
           onClick={() => {
-            item[item.length - 2] > 0
+            item[item.length - 2] > 1
               ? setCounter(item[item.length - 2] - 1, itemIndex)
-              : setCounter(item[item.length - 2] + 0, itemIndex);
+              : removeItem(itemIndex);
           }}
         />
       </div>

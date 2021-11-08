@@ -9,25 +9,9 @@ export class ContextProvider extends Component {
 
     this.state = {
       addedItems: [],
-      minicartStyle: { display: "none" },
-      minicartActive: false,
-      currenciesStyle: { display: "none" },
-      currenciesActive: false,
       currency: ["USD", 0],
     };
   }
-
-  showCurrencies = () => {
-    this.state.currenciesActive
-      ? this.setState({
-          currenciesStyle: { display: "none" },
-          currenciesActive: false,
-        })
-      : this.setState({
-          currenciesStyle: { display: "block" },
-          currenciesActive: true,
-        });
-  };
 
   setCurrency = (currency, index) => {
     this.setState({
@@ -50,18 +34,6 @@ export class ContextProvider extends Component {
       default:
         return "$";
     }
-  };
-
-  showMinicart = () => {
-    this.state.minicartActive
-      ? this.setState({
-          minicartStyle: { display: "none" },
-          minicartActive: false,
-        })
-      : this.setState({
-          minicartStyle: { display: "block" },
-          minicartActive: true,
-        });
   };
 
   addItem = (item) => {
@@ -106,24 +78,39 @@ export class ContextProvider extends Component {
     return this.state.addedItems.map((a) => a.includes(product)).includes(true);
   };
 
+  removeItem = (itemIndex) => {
+    let addedItemArray = [...this.state.addedItems];
+    addedItemArray.splice(itemIndex, 1);
+    this.setState({
+      addedItems: addedItemArray,
+    });
+  };
+
+  countTotal = () => {
+    let total = 0;
+
+    this.state.addedItems.forEach((item) => {
+      total =
+        total +
+        item[item.length - 2] * item[item.length - 1][this.state.currency[1]];
+    });
+    return total.toFixed(2);
+  };
+
   render() {
     return (
       <Context.Provider
         value={{
           addedItems: this.state.addedItems,
-          minicartStyle: this.state.minicartStyle,
-          minicartActive: this.state.minicartActive,
-          currenciesStyle: this.state.currenciesStyle,
-          currenciesActive: this.state.currenciesActive,
           currency: this.state.currency,
-          showCurrencies: this.showCurrencies,
           setCurrency: this.setCurrency,
           setCurrencySign: this.setCurrencySign,
-          showMinicart: this.showMinicart,
           addItem: this.addItem,
           setCounter: this.setCounter,
           switchAttributes: this.switchAttributes,
           cartCheck: this.cartCheck,
+          removeItem: this.removeItem,
+          countTotal: this.countTotal,
         }}
       >
         {this.props.children}

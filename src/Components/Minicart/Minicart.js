@@ -8,8 +8,8 @@ import "./Minicart.css";
 export class Minicart extends Component {
   static contextType = Context;
   render() {
-    const { minicartStyle, addedItems, showMinicart } = this.context;
-
+    const { minicartStyle, showMinicart } = this.props;
+    const { addedItems } = this.context;
     return (
       <>
         <div
@@ -23,7 +23,7 @@ export class Minicart extends Component {
             <span>, {addedItems.length} items</span>
           </div>
           <MinicartList />
-          <MinicartFooter />
+          <MinicartFooter showMinicart={showMinicart} />
         </div>
       </>
     );

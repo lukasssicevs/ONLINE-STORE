@@ -7,26 +7,16 @@ import "./MinicartFooter.css";
 export class MinicartFooter extends Component {
   static contextType = Context;
   render() {
-    const { addedItems, showMinicart, currency, setCurrencySign } =
-      this.context;
-    let total = 0;
+    const { currency, setCurrencySign, countTotal } = this.context;
+    const { showMinicart } = this.props;
     return (
       <div className="minicart-footer">
         <div className="total-container">
           <p className="total-name">Total</p>
-          {addedItems.map((item, index) => {
-            total =
-              total +
-              item[item.length - 2] * item[item.length - 1][currency[1]];
-            return index === addedItems.length - 1 ? (
-              <p className="total-amount">
-                {setCurrencySign([currency[0]])}
-                {total.toFixed(2)}
-              </p>
-            ) : (
-              false
-            );
-          })}
+          <p className="total-amount">
+            {setCurrencySign([currency[0]])}
+            {countTotal()}
+          </p>
         </div>
         <div className="minicart-footer-buttons">
           <NavLink
