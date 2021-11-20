@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+import { ternaryCheck } from "../../Helpers";
 import Context from "../../Context";
 import "./DescriptionImages.css";
 
@@ -8,16 +9,21 @@ export class Images extends Component {
     super(props);
 
     this.state = {
-      image: "",
+      image: true,
     };
 
-    this.setImage = this.setImage.bind(this);
+    this.initialImage = this.initialImage.bind(this);
+    this.changeImage = this.changeImage.bind(this);
   }
 
-  setImage = (image) => {
+  initialImage = (image) => {
     this.setState({
       image: image,
     });
+  };
+
+  changeImage = (image, gallery) => {
+    return image === true ? gallery[0] : image;
   };
 
   static contextType = Context;
@@ -29,14 +35,15 @@ export class Images extends Component {
         <div className="small-image-container">
           {gallery.map((image, index) => (
             <img
-              className="small-image"
+              className={ternaryCheck(
+                inStock,
+                "small-image",
+                "small-image-out"
+              )}
               src={image}
               alt={name}
-              style={{
-                opacity: `${inStock ? "1" : "0.5"}`,
-              }}
               onClick={() => {
-                this.setImage(image);
+                this.initialImage(image);
               }}
               key={`${name}:${index}`}
             />
@@ -44,18 +51,13 @@ export class Images extends Component {
         </div>
         <div className="big-image-container">
           <img
-            className="big-image"
-            src={image === "" ? gallery[0] : image}
+            className={ternaryCheck(inStock, "big-image", "big-image-out")}
+            src={this.changeImage(image, gallery)}
             alt={name}
-            style={{
-              opacity: `${inStock ? "1" : "0.5"}`,
-            }}
           />
-          {inStock === false ? (
-            <div className="description-outofstock-sign">OUT OF STOCK</div>
-          ) : (
-            false
-          )}
+          <div className={ternaryCheck(inStock, "none", "outofstock-sign")}>
+            OUT OF STOCK
+          </div>
         </div>
       </>
     );

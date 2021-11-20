@@ -22,11 +22,11 @@
 .right-button {
   grid-area: 2/3 / span 1 / span 1;
   cursor: pointer;
-  z-index: 10;
+  z-index: 2;
 }
 
 .left-button {
   grid-area: 2/1 / span 1 / span 1;
   cursor: pointer;
-  z-index: 10;
+  z-index: 2;
 }

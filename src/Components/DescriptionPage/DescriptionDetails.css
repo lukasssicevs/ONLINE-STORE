@@ -36,7 +36,7 @@
   font-size: 24px;
 }
 
-.product-details .normal-button,
+.product-details .add-button,
 .disabled-button {
   margin-top: 20px;
   width: 100%;
@@ -49,12 +49,12 @@
   cursor: pointer;
 }
 
-.product-details .normal-button {
+.product-details .add-button {
   background-color: var(--green);
   cursor: pointer;
 }
 
-.product-details .normal-button:hover {
+.product-details .add-button:hover {
   background-color: green;
 }
 
@@ -69,22 +69,8 @@
 
 .product-description {
   margin-top: 40px;
-  overflow-y: scroll;
-  min-height: 230px;
-  overflow: overlay;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-style: normal;
   font-size: 16px;
-}
-
-.product-description::-webkit-scrollbar {
-  width: 10px;
-}
-
-.product-description::-webkit-scrollbar-track {
-  background: #f1f1f100;
-}
-.product-description::-webkit-scrollbar-thumb {
-  background: rgba(136, 136, 136, 0);
 }
