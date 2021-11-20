@@ -1,42 +1,62 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
 
+import { ternaryCheck } from "../../Helpers";
 import badgeCart from "../../Assets/badgeCart.svg";
 import Context from "../../Context";
 import "./ListingPageImage.css";
 
 export class ListingPageImage extends Component {
+  constructor(props) {
+    super(props);
+
+    this.defaultAttributes = this.defaultAttributes.bind(this);
+  }
+
+  defaultAttributes = (selected, attributes, prices) => {
+    attributes.map((attribute) =>
+      selected.push([attribute.name, attribute.items[0].value])
+    );
+    selected.push(1);
+    selected.push(prices.map((price) => price.amount));
+  };
+
   static contextType = Context;
+
   render() {
-    const { product, category } = this.props;
-    const { cartCheck } = this.context;
+    const { id, name, gallery, attributes, inStock, prices } =
+      this.props.product;
+    const { hover } = this.props;
+    const { addItem } = this.context;
+
+    const mainImage = gallery[0];
+    const selected = [id];
+    const showBadge = inStock && hover;
+
+    this.defaultAttributes(selected, attributes, prices);
+
     return (
-      <NavLink
-        to={`/${category}/${product.id}`}
-        className="listing-page-link"
-        key={product.id}
-      >
+      <>
         <img
-          className="listing-page-image"
-          src={product.gallery[0]}
-          alt={product.name}
-          style={{
-            opacity: `${product.inStock ? "1" : "0.5"}`,
-          }}
+          className={ternaryCheck(
+            inStock,
+            "listing-page-image",
+            "listing-page-image-out"
+          )}
+          src={mainImage}
+          alt={name}
         />
-        {product.inStock === false ? (
-          <div className="outofstock-sign">OUT OF STOCK</div>
-        ) : (
-          false
-        )}
-        {cartCheck(product.id) ? (
-          <div className="added-product-badge">
-            <img src={badgeCart} alt="cart" />
-          </div>
-        ) : (
-          false
-        )}
-      </NavLink>
+        <div className={ternaryCheck(inStock, "none", "lp-outofstock-sign")}>
+          OUT OF STOCK
+        </div>
+        <div
+          className={ternaryCheck(showBadge, "add-badge", "none")}
+          onClick={() => {
+            addItem(selected);
+          }}
+        >
+          <img src={badgeCart} alt="cart" />
+        </div>
+      </>
     );
   }
 }

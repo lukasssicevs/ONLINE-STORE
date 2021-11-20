@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+import { increaseCounter, decreaseCounter } from "../../Helpers";
 import Minus from "../../Assets/minus.svg";
 import Plus from "../../Assets/plus.svg";
 import Context from "../../Context";
@@ -10,23 +11,23 @@ export class CartProductCounter extends Component {
   render() {
     const { item, itemIndex } = this.props;
     const { setCounter, removeItem } = this.context;
+    const counter = item[item.length - 2];
+
     return (
       <div className="counter-container">
         <img
           className="cart-counter-button"
           src={Plus}
           alt="plus-box"
-          onClick={() => setCounter(item[item.length - 2] + 1, itemIndex)}
+          onClick={() => increaseCounter(counter, itemIndex, setCounter)}
         />
-        <div className="cart-product-counter">{item[item.length - 2]}</div>
+        <div className="cart-product-counter">{counter}</div>
         <img
           className="cart-counter-button"
           src={Minus}
           alt="minus-box"
           onClick={() => {
-            item[item.length - 2] > 1
-              ? setCounter(item[item.length - 2] - 1, itemIndex)
-              : removeItem(itemIndex);
+            decreaseCounter(counter, itemIndex, setCounter, removeItem);
           }}
         />
       </div>

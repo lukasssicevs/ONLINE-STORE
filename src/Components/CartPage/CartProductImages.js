@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
-import toLeft from "../../Assets/toRight.svg";
-import toRight from "../../Assets/toLeft.svg";
+import arrowLeft from "../../Assets/arrowLeft.svg";
+import arrowRight from "../../Assets/arrowRight.svg";
 import Context from "../../Context";
 import "./CartProductImages.css";
 
@@ -37,28 +37,29 @@ export class CartProductImages extends Component {
       : false;
   };
 
+  countImages = (gallery, ifMany) => {
+    return gallery.length > 2 ? ifMany : "none";
+  };
+
   static contextType = Context;
 
   render() {
     const { gallery, name } = this.props;
+    const displayedImage = gallery[this.state.imageIndex];
 
     return (
       <div className="cart-images-container">
         <img
-          src={toLeft}
+          src={arrowLeft}
           alt="arrow-left"
-          className="left-button"
-          onClick={() => this.previousImage()}
+          className={this.countImages(gallery, "left-button")}
+          onClick={this.previousImage}
         />
+        <img className="cart-product-image" src={displayedImage} alt={name} />
         <img
-          className="cart-product-image"
-          src={gallery[this.state.imageIndex]}
-          alt={name}
-        />
-        <img
-          src={toRight}
+          src={arrowRight}
           alt="arrow-right"
-          className="right-button"
+          className={this.countImages(gallery, "right-button")}
           onClick={() => this.nextImage(gallery)}
         />
       </div>
